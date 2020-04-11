@@ -6,11 +6,10 @@ import (
 )
 
 func getDirString(url string) string {
-	// url = strings.Trim(url, "/")
 	a := strings.Split(url, "/")
-	a = a[0 : len(a)-1]
-	b := strings.Join(a, "/")
-	return b
+	b := a[0 : len(a)-1]
+	c := strings.Join(b, "/")
+	return c
 }
 
 func isHttpUrl(file string) bool {
