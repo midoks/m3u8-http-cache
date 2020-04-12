@@ -21,6 +21,9 @@ const (
 	MHC_CACHE_DIR = "cache"
 )
 
+type DownloadTask struct {
+}
+
 func getSafeyHttp() *http.Client {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
