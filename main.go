@@ -141,10 +141,6 @@ func goDownloadTs(sc *url.URL, actualHash uint32, list []string) {
 	}
 }
 
-func sateyDownloadTs(pathPrefix string, tsUrl string) {
-
-}
-
 func downloadTS(pathPrefix string, tsUrl string) {
 	fmt.Println("downloadTS", pathPrefix, tsUrl)
 	sc, err := url.Parse(tsUrl)
