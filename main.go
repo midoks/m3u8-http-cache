@@ -39,6 +39,7 @@ func httpGet(urlPath string) (string, error) {
 	scPath := strings.Trim(sc.Path, "/")
 	actualHash := murmur.Murmur3([]byte(sc.Path))
 	scPath = fmt.Sprintf("%s/%s/%d%s", MHC_CACHE_DIR, sc.Host, actualHash, sc.Path)
+	b := getDirString(scPath)
 
 	resp, err := client.Get(urlPath)
 	if err != nil {
@@ -61,6 +62,10 @@ func httpGet(urlPath string) (string, error) {
 		if !strings.HasPrefix(line, "#") {
 			tsFileName := line
 			m3u8List = append(m3u8List, tsFileName)
+		} else {
+			if strings.Contains(line, "URI") {
+				downloadKey(fmt.Sprintf("%s/%s/%d", MHC_CACHE_DIR, sc.Host, actualHash), line)
+			}
 		}
 	}
 
@@ -69,7 +74,6 @@ func httpGet(urlPath string) (string, error) {
 		return httpGet(tsUrl)
 	}
 
-	b := getDirString(scPath)
 	// if _, err := pathExists(b); err != nil {
 	os.MkdirAll(b, os.ModePerm)
 	// }
@@ -94,19 +98,46 @@ func httpGet(urlPath string) (string, error) {
 	return scPath, err
 }
 
+func downloadKey(prefix, content string) {
+	fmt.Println("downloadKey", content)
+
+	list := strings.Split(content, "URI")
+	urlKey := strings.Trim(list[1], "=")
+	urlKey = strings.Trim(urlKey, "\"")
+
+	sc, err := url.Parse(urlKey)
+
+	fullPath := fmt.Sprintf("%s%s", prefix, sc.Path)
+
+	client := getSafeyHttp()
+	resp, err := client.Get(urlKey)
+	if err != nil {
+		fmt.Println("download ts ", urlKey, "failed,", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	f, err := os.Create(fullPath)
+	if err != nil {
+		fmt.Println(f, err)
+		return
+	}
+	io.Copy(f, resp.Body)
+}
+
 func goDownloadTs(sc *url.URL, actualHash uint32, list []string) {
-	b := getDirString(sc.Path)
-	var tsUrl string
+	gDir := getDirString(sc.Path)
+	tsUrl := ""
 
 	for _, val := range list {
-
 		if isSingleFile(val) {
-			tsUrl = fmt.Sprintf("%s://%s%s/%s", sc.Scheme, sc.Host, b, val)
+			tsUrl = fmt.Sprintf("%s://%s%s/%s", sc.Scheme, sc.Host, gDir, val)
+		} else if isHttpUrl(val) {
+			tsUrl = val
 		} else {
 			tsUrl = fmt.Sprintf("%s://%s%s", sc.Scheme, sc.Host, val)
 		}
-		fmt.Println("b:", b, tsUrl)
-		downloadTS(fmt.Sprintf("%s/%s/%d", MHC_CACHE_DIR, sc.Host, actualHash), tsUrl)
+		go downloadTS(fmt.Sprintf("%s/%s/%d", MHC_CACHE_DIR, sc.Host, actualHash), tsUrl)
 	}
 }
 
@@ -125,9 +156,7 @@ func downloadTS(pathPrefix string, tsUrl string) {
 		os.MkdirAll(b, os.ModePerm)
 	}
 
-	ss, err := os.Stat(scPath)
-	fmt.Println(ss, err)
-	if err == nil {
+	if exists, _ := pathExists(scPath); exists {
 		return
 	}
 
