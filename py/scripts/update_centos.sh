@@ -17,12 +17,12 @@ fi
 wget -O /tmp/main.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/main
 cd /tmp && unzip /tmp/main.zip
 
-rm -rf /www/wwwroot/vms/*.pyc
+rm -rf /www/wwwroot/m3u8/*.pyc
 
-pip install -r /www/wwwroot/vms/requirements.txt
+pip install -r /www/wwwroot/m3u8/py/requirements.txt
 
 
-/usr/bin/cp -rf  /tmp/vms-main/* /www/wwwroot/vms
+/usr/bin/cp -rf  /tmp/m3u8-http-cache-main/* /www/wwwroot/m3u8
 
-cd /www/wwwroot/vms && ./scripts/init.d/vms restart
-cd /www/wwwroot/vms && ./scripts/init.d/vms default
+cd /www/wwwroot/m3u8/py && ./scripts/init.d/m3u8 restart
+cd /www/wwwroot/m3u8/py && ./scripts/init.d/m3u8 default

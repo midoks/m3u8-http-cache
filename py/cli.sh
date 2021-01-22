@@ -10,7 +10,7 @@ mvg_start(){
 
 mvg_start_debug(){
 	# python vms_task.py &
-	gunicorn -b :8000 -k gevent -w 1 m3u8cache:app
+	gunicorn -b :9000 -k gevent -w 1 m3u8cache:app
 }
 
 mvg_task_stop(){
@@ -25,7 +25,7 @@ mvg_task_stop(){
 
 mvg_stop()
 {
-	PLIST=`ps -ef|grep vms:app |grep -v grep|awk '{print $2}'`
+	PLIST=`ps -ef|grep m3u8cache:app |grep -v grep|awk '{print $2}'`
 	for i in $PLIST
 	do
 	    kill -9 $i

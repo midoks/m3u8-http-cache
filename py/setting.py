@@ -14,7 +14,7 @@ if not os.path.exists(os.getcwd() + '/logs'):
     os.mkdir(os.getcwd() + '/logs')
 
 if not os.path.exists('data/port.pl'):
-    common.writeFile('data/port.pl', '8000')
+    common.writeFile('data/port.pl', '9000')
 
 app_port = common.readFile('data/port.pl')
 bind = []
