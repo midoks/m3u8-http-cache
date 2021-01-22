@@ -133,7 +133,6 @@ tmp/wu_*
 *.mp4
 *.ts
 *.m3u8
-data/port.pl
 *.db
 *.mkv
 *.mpd
