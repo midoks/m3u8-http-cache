@@ -13,11 +13,11 @@ serverPath=/www/server
 
 yum install -y libevent libevent-devel mysql-devel libjpeg* libpng* gd* zip unzip
 if [ ! -d /www/wwwroot/m3u8 ];then
-	wget -O /tmp/main.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/main
-	cd /tmp && unzip /tmp/main.zip
-	mv /tmp/m3u8-http-cache-main /www/wwwroot/m3u8
-	rm -rf /tmp/main.zip
-	rm -rf /tmp/m3u8-http-cache-main
+	wget -O /tmp/master.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/master
+	cd /tmp && unzip /tmp/master.zip
+	mv /tmp/m3u8-http-cache-master /www/wwwroot/m3u8
+	rm -rf /tmp/master.zip
+	rm -rf /tmp/m3u8-http-cache-master
 fi 
 
 yum groupinstall -y "Development Tools"
