@@ -69,12 +69,12 @@ fi
 
 
 
-pip install -r /www/wwwroot/m3u8/requirements.txt
+pip install -r /www/wwwroot/m3u8/py/requirements.txt
 
 
-cd /www/wwwroot/m3u8 && ./cli.sh start
+cd /www/wwwroot/m3u8/py && ./cli.sh start
 sleep 5
 
-cd /www/wwwroot/m3u8 && ./cli.sh stop
-cd /www/wwwroot/m3u8 && ./scripts/init.d/m3u8 default
-cd /www/wwwroot/m3u8 && ./cli.sh start
+cd /www/wwwroot/m3u8/py && ./cli.sh stop
+cd /www/wwwroot/m3u8/py && ./scripts/init.d/m3u8 default
+cd /www/wwwroot/m3u8/py && ./cli.sh start
