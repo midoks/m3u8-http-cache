@@ -14,8 +14,8 @@ if [ -f /tmp/main.zip ];then
     rm -rf /tmp/main.zip
 fi
 
-wget -O /tmp/main.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/main
-cd /tmp && unzip /tmp/main.zip
+wget -O /tmp/master.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/master
+cd /tmp && unzip /tmp/master.zip
 
 rm -rf /www/wwwroot/m3u8/*.pyc
 
