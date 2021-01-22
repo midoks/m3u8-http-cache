@@ -191,7 +191,7 @@ def cache(path=None, format=None, filename=None):
     if os.path.exists(filename):
         # print()
         if os.path.getsize(filename) < 1024:
-            print(path, os.path.getsize(path))
+            print(filename, os.path.getsize(filename))
             c = common.httpGet(url)
             common.writeFile(path, c)
 
