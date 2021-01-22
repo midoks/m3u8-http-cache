@@ -37,7 +37,7 @@ if [ "$OSNAME" == 'MAC' ];then
 	echo 'The development environment only needs to be downloaded again!'
 	exit 0
 else
-	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/main/scripts/update_centos.sh | sh
+	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/master/py/scripts/update_centos.sh | sh
 fi
 
 endTime=`date +%s`

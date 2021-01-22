@@ -34,9 +34,9 @@ fi
 
 
 if [ "$OSNAME" == 'MAC' ];then
-	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/main/scripts/install_macos.sh | sh
+	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/master/py/scripts/install_macos.sh | sh
 else
-	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/main/scripts/install_centos.sh | sh
+	curl -fsSL  https://raw.githubusercontent.com/midoks/m3u8-http-cache/master/py/scripts/install_centos.sh | sh
 fi 
 
 
