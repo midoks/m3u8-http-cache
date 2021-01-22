@@ -6,12 +6,12 @@ LANG=en_US.UTF-8
 # unalias cp
 # alias cp='cp -i'
 
-if [ -d /tmp/vms-main ];then
-    rm -rf /tmp/vms-main
+if [ -d /tmp/m3u8-http-cache-master ];then
+    rm -rf /tmp/m3u8-http-cache-master
 fi
 
-if [ -f /tmp/main.zip ];then
-    rm -rf /tmp/main.zip
+if [ -f /tmp/master.zip ];then
+    rm -rf /tmp/master.zip
 fi
 
 wget -O /tmp/master.zip https://codeload.github.com/midoks/m3u8-http-cache/zip/master
