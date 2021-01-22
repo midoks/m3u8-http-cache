@@ -199,27 +199,12 @@ case "$1" in
         app_start;;
     'status') app_status;;
     'logs') error_logs;;
-    'default')
-        cd $app_path
-        port=$(cat $app_path/data/port.pl)
-        password=$(cat $app_path/data/default.pl)
-        if [ -f $app_path/data/domain.conf ];then
-            address=$(cat $app_path/data/domain.conf)
-        fi
-        if [ -f $app_path/data/admin_path.pl ];then
-            auth_path=$(cat $app_path/data/admin_path.pl)
-        fi
-
-        if [ "$address" = "" ];then
-            address=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
-        fi
+    'default')       
 
         echo -e "=================================================================="
         echo -e "\033[32mVMS default info!\033[0m"
         echo -e "=================================================================="
-        echo  "app-URL: http://$address:$port$auth_path"
+        echo  "Welcome to use this software"
         echo -e "=================================================================="
-        echo -e "username: admin"
-        echo -e "password: $password"
         ;;
 esac

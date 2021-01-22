@@ -172,10 +172,30 @@ def index(path=None, format=None, filename=None):
     return 'hello world'
 
 
+def getMM(url):
+    import urllib2
+    # url = "https://www.baidu.com"
+    req_header = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11",
+                  "Accept": "text/html;q=0.9,*/*;q=0.8",
+                  "Accept-Charset": "ISO-8859-1,utf-8;q=0.7,*;q=0.3",
+                  "Accept-Encoding": "gzip",
+                  "Connection": "close",
+                  "Referer": None  # 注意如果依然不能抓取的话，这里可以设置抓取网站的host
+                  }
+    req_timeout = 5
+    req = urllib2.Request(url, None, req_header)
+    resp = urllib2.urlopen(req, None, req_timeout)
+    html = resp.read()
+    print(html)
+
+
 @app.route('/cache', methods=['GET'])
 def cache(path=None, format=None, filename=None):
 
     url = request.args.get('url', '').encode('utf-8')
+
+    url = url.split('?')[0]
+
     parsed_tuple = urlparse.urlparse(url)
 
     path_dir = 'cache/' + parsed_tuple.netloc + \
@@ -186,8 +206,10 @@ def cache(path=None, format=None, filename=None):
     shotname, extension = os.path.splitext(tmpfilename)
 
     filename = path_dir + '/' + tmpfilename
-    # print(filepath, tmpfilename, shotname, extension)
-    # print(filename)
+    print(filepath, tmpfilename, shotname, extension)
+    print(filename)
+
+    # print requests.get(url).text
     if os.path.exists(filename):
         # print()
         if os.path.getsize(filename) < 1024:
