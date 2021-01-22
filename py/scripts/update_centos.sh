@@ -22,7 +22,7 @@ rm -rf /www/wwwroot/m3u8/*.pyc
 pip install -r /www/wwwroot/m3u8/py/requirements.txt
 
 
-/usr/bin/cp -rf  /tmp/m3u8-http-cache-main/* /www/wwwroot/m3u8
+/usr/bin/cp -rf  /tmp/m3u8-http-cache-master/* /www/wwwroot/m3u8
 
 cd /www/wwwroot/m3u8/py && ./scripts/init.d/m3u8 restart
 cd /www/wwwroot/m3u8/py && ./scripts/init.d/m3u8 default
